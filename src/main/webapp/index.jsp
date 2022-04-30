@@ -12,6 +12,8 @@
   </head>
   <body>
   <a href="login.jsp">login</a><br>
-  <a href="join.jsp">join</a><br>
+  <a href="join.jsp">join</a><br><br>
+  <a href="ko">ko</a><br>
+  <a href="en">en</a><br>
   </body>
 </html>

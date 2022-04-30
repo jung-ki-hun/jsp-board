@@ -1,7 +1,10 @@
 package com.nhnacademy.common.servlet;
 
+import com.nhnacademy.user.EndUser;
+import com.nhnacademy.user.EndUserRepository;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Objects;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,23 +16,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
-@WebServlet(name = "loginServlet", urlPatterns = "/login", initParams = {
-    @WebInitParam(name = "id", value = "dongmyo"),
-    @WebInitParam(name = "pwd", value = "12345")
-})
+@WebServlet(name = "loginServlet", urlPatterns = "/login")
 @Slf4j
 public class LoginServlet extends HttpServlet {
     private String configId;
     private String configPwd;
-
+    private EndUserRepository endUserRepository;
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
 
         // <servlet>
         //     <init-param>
-        configId = config.getInitParameter("id");
-        configPwd = config.getInitParameter("pwd");
+        // configId = config.getInitParameter("id");
+        // configPwd = config.getInitParameter("pwd");
     }
 
     @Override
@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
         throws ServletException, IOException {
         String id = req.getParameter("id");
         String pwd = req.getParameter("pwd");
-
+        findById(id,pwd);
         if (configId.equals(id) && configPwd.equals(pwd)) {
             HttpSession session = req.getSession();
             session.setAttribute("id", id);
@@ -68,6 +68,17 @@ public class LoginServlet extends HttpServlet {
         } else {
             // NOTE: 정적 리소스의 경우 RequestDispatcher보단 sendRedirect 사용 권장.
             resp.sendRedirect("/login.html");
+        }
+    }
+    private void findById(String id, String pwd){
+        List<EndUser> userlist =  endUserRepository.getUsers();
+        int size = userlist.size();
+        for (int i = 0; i < size; i++) {
+            if(userlist.get(i).getId().equals(id)){
+                configId = userlist.get(i).getId();
+                configPwd = userlist.get(i).getPassword();
+                break;
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package com.nhnacademy.common.servlet;
+package com.nhnacademy.common.filter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,10 +26,6 @@ import lombok.extern.slf4j.Slf4j;
         + "/login.html\n"
         + "/logout\n"
         + "/loginForm\n"
-        + "/cookie-test/read\n"
-        + "/cookie-test/write\n"
-        + "/cookie-test/more/read\n"
-        + "/cookie-test/more/write\n"
         + "/upload.html")
 })
 @Slf4j

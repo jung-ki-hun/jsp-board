@@ -6,10 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EndUserRepository implements UserRepository {
-    static List<EndUser> userRepository = new ArrayList<>();
+    private static EndUserRepository endUserRepository = null;
+    List<EndUser> userRepository = new ArrayList<>();
+    private EndUserRepository(){
+        throw new UnsupportedOperationException();
+    };
+    public static EndUserRepository getInstance(){
+        if(endUserRepository == null)
+        {
+            endUserRepository = new EndUserRepository();
+        }
+        return endUserRepository;
+    }
     @Override
-    public static void add(User user) {
-
+    public void add(User user) {
         userRepository.add((EndUser)user);
     }
 

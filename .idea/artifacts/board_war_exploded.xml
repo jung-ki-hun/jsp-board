@@ -17,6 +17,9 @@
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.2.11" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.2.11" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.32" />
+          <element id="library" level="project" name="Maven: org.glassfish.web:jakarta.servlet.jsp.jstl:1.2.6" />
+          <element id="library" level="project" name="Maven: jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:1.2.4" />
+          <element id="library" level="project" name="Maven: jakarta.el:jakarta.el-api:3.0.2" />
           <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.24" />
           <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.8.2" />
         </element>

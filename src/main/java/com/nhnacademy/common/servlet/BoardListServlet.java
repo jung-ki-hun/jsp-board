@@ -2,6 +2,7 @@ package com.nhnacademy.common.servlet;
 
 import com.nhnacademy.common.board.BoardPostRepository;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +19,8 @@ public class BoardListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
         req.setAttribute("boardList",  boardPostRepository.getInstance().getPosts());
+        RequestDispatcher dispatcher = req.getRequestDispatcher("src/main/webapp/boardList.jsp");
+        dispatcher.forward(req, resp);
     }
 
     @Override

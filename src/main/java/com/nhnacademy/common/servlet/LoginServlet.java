@@ -25,11 +25,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-
-        // <servlet>
-        //     <init-param>
-        // configId = config.getInitParameter("id");
-        // configPwd = config.getInitParameter("pwd");
     }
 
     @Override
@@ -38,9 +33,9 @@ public class LoginServlet extends HttpServlet {
         log.error("/login.doGet()");
         HttpSession session = req.getSession(false);
         if (Objects.isNull(session)/* || Objects.isNull(session.getAttribute("id"))*/) {
-            resp.sendRedirect("/login.html");
+            resp.sendRedirect("/login.jsp");
         } else {
-            resp.setContentType("text/html");
+            resp.setContentType("text/jsp");
             resp.setCharacterEncoding("UTF-8");
 
             try (PrintWriter out = resp.getWriter()) {
@@ -61,17 +56,13 @@ public class LoginServlet extends HttpServlet {
         if (configId.equals(id) && configPwd.equals(pwd)) {
             HttpSession session = req.getSession();
             session.setAttribute("id", id);
-
-            // NOTE: RequestDispatcher를 사용하면 POST method로 다시 요청이 들어온다.
-            //       GET Method로 새로운 요청이 시작되어야 하므로 sendRedirect 사용.
             resp.sendRedirect("/login");
         } else {
-            // NOTE: 정적 리소스의 경우 RequestDispatcher보단 sendRedirect 사용 권장.
-            resp.sendRedirect("/login.html");
+            resp.sendRedirect("/login.jsp");
         }
     }
     private void findById(String id, String pwd){
-        List<EndUser> userlist =  endUserRepository.getUsers();
+        List<EndUser> userlist = EndUserRepository.getInstance().getUsers();
         int size = userlist.size();
         for (int i = 0; i < size; i++) {
             if(userlist.get(i).getId().equals(id)){

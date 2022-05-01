@@ -4,13 +4,15 @@ import com.nhnacademy.common.object.dataStructure.User;
 import com.nhnacademy.common.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class EndUserRepository implements UserRepository {
     private static EndUserRepository endUserRepository = null;
-    List<EndUser> userRepository = new ArrayList<>();
+    private List<EndUser> userRepository = new ArrayList<>();
     private EndUserRepository(){
-        throw new UnsupportedOperationException();
-    };
+     //   throw new UnsupportedOperationException();
+    }
     public static EndUserRepository getInstance(){
         if(endUserRepository == null)
         {
@@ -20,7 +22,11 @@ public class EndUserRepository implements UserRepository {
     }
     @Override
     public void add(User user) {
+        log.info(user.getId());
+        EndUser temp = (EndUser)user;
+        log.info(temp.getId()+"dd");
         userRepository.add((EndUser)user);
+        log.info(userRepository.get(0).getId());
     }
 
     @Override
